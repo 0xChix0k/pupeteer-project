@@ -1,24 +1,28 @@
-const userInfo = require('./userInfo.json');
+const userInfo = require('../userInfo.json');
 
-async function login(page) {
+async function Login(page) {
+  await page.goto(userInfo.homePage, {
+    waitUntil: 'domcontentloaded',
+  });
   while (true) {
-    // 等待 #downloadForm 出現
-    await page.waitForSelector('#downloadForm');
+    await page.waitForSelector('#thisForm');
     await page.type('#userId', userInfo.userId), { delay: 100 };
     await page.type('#userPwd', userInfo.passwd), { delay: 100 };
-    await page.waitForTimeout(1000);
+    await page.click('#securityImg');
+    await page.waitForTimeout(1500);
     const userInput = await page.evaluate(() => {
       return window.prompt('請輸入圖形驗證碼：');
     });
     await page.type('#securityId', userInput, { delay: 100 });
     await page.click('#loginButton');
     await page.waitForNavigation();
-    if (page.url() === userInfo.loginCheck.success) {
+    if (page.url() !== userInfo.loginCheck.fail) {
       break;
     } else {
+      console.log('Login fail');
       continue;
     }
   }
 }
 
-exports.login = login;
+exports.Login = Login;

@@ -1,0 +1,40 @@
+const XLSX = require('xlsx');
+const fs = require('fs');
+
+async function MapToExcel(list,params) {
+  // 建立 Workbook 物件
+  const workbook = XLSX.utils.book_new();
+  console.log(list);
+  // 將二維陣列轉換成工作表
+  const worksheet = XLSX.utils.aoa_to_sheet(list);
+
+  // 將工作表新增到 Workbook 中
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+
+  // 將 Workbook 寫入二進位格式
+  const excelBuffer = XLSX.write(workbook, { type: 'buffer', bookType: 'xls' });
+  
+  // 創建自動篩選/自動展開欄位
+  const filterRange = XLSX.utils.decode_range(worksheet['!ref']);
+  worksheet['!autofilter'] = { ref: filterRange };
+
+  const folderPath = `${ params.savePath }/${ params.foldeName }`;
+  // 檢查資料夾是否存在，不存在則建立
+  fs.existsSync(folderPath) || fs.mkdirSync(folderPath);
+  // 指定下載路徑
+  const downloadPath = `${ folderPath }/${ params.fileName }.xls`;
+  // 檢查檔案是否存在，存在則刪除
+  fs.existsSync(downloadPath) && fs.unlinkSync(downloadPath);
+
+  // 將二進位資料寫入檔案
+  fs.writeFile(downloadPath, excelBuffer, (err) => {
+    if (err) {
+      console.error('無法寫入檔案:', err);
+      return;
+    }
+    const mes = `表單: ${ params.fileName } 儲存成功`;
+    console.log(mes);
+  });
+}
+
+exports.MapToExcel = MapToExcel;
