@@ -2,7 +2,6 @@ async function GetDataMap(page, action) {
   await page.goto(action.url, {
     waitUntil: 'domcontentloaded',
   });
-
   //取得營業所總數
   await page.waitForSelector('select[name="dep"]', { timeout: 60000 });
   let selects = await page.$('select[name="dep"]');
@@ -12,7 +11,6 @@ async function GetDataMap(page, action) {
     return optionValues;
   }, selects);
   const formName = action.formName;
-  console.log('get optionList success');
   const today = new Date();
   const dataDate = new Date(today.setDate(today.getDate() - 1));
   //民國年
@@ -24,6 +22,7 @@ async function GetDataMap(page, action) {
   result.push(action.titles);
 
   for (var i = 0; i < optionList.length; i++) {
+    process.stdout.write(`${action.fileName}取得.....${i}/${optionList.length}\r`);
     await page.goto(action.url, {
       waitUntil: 'domcontentloaded',
     });
@@ -88,7 +87,9 @@ async function GetDataMap(page, action) {
     );
     result.push(...trDatas);
   }
-  // console.log('result Finish');
+  process.stdout.write(
+    `${action.fileName}資料取得.....${optionList.length}/${optionList.length}\r\n`
+  );
   return result;
 }
 

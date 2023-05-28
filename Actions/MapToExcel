@@ -2,9 +2,9 @@ const XLSX = require('xlsx');
 const fs = require('fs');
 
 async function MapToExcel(list,params) {
+  process.stdout.write(`表單: ${params.fileName}.xls 儲存.....執行\r`);
   // 建立 Workbook 物件
   const workbook = XLSX.utils.book_new();
-  console.log(list);
   // 將二維陣列轉換成工作表
   const worksheet = XLSX.utils.aoa_to_sheet(list);
 
@@ -13,10 +13,6 @@ async function MapToExcel(list,params) {
 
   // 將 Workbook 寫入二進位格式
   const excelBuffer = XLSX.write(workbook, { type: 'buffer', bookType: 'xls' });
-  
-  // 創建自動篩選/自動展開欄位
-  const filterRange = XLSX.utils.decode_range(worksheet['!ref']);
-  worksheet['!autofilter'] = { ref: filterRange };
 
   const folderPath = `${ params.savePath }/${ params.foldeName }`;
   // 檢查資料夾是否存在，不存在則建立
@@ -29,11 +25,10 @@ async function MapToExcel(list,params) {
   // 將二進位資料寫入檔案
   fs.writeFile(downloadPath, excelBuffer, (err) => {
     if (err) {
-      console.error('無法寫入檔案:', err);
+      process.stdout.write(`表單: ${params.fileName}.xls 儲存.....失敗\r\n`);
       return;
     }
-    const mes = `表單: ${ params.fileName } 儲存成功`;
-    console.log(mes);
+  process.stdout.write(`表單: ${params.fileName}.xls 儲存.....成功\r\n`);
   });
 }
 

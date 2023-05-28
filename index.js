@@ -8,29 +8,25 @@ const dataInfo = require('./dataInfo.json');
 
 (async () => {
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: 'new',
     executablePath: userInfo.executablePath,
     args: ['--window-size=1920,1080'],
     defaultViewport: null,
   });
+
   const page = await browser.newPage();
 
-  Login(page);
+  await Login(page);
 
   await page.waitForSelector('frame[name="Index"]', { timeout: 60000 });
-  console.log('login success');
 
   const purchaseList = await GetDataMap(page, dataInfo.purchase);
-  console.log('purchaseList success');
-
   const backList = await GetDataMap(page, dataInfo.back);
-  console.log('backList success');
-  
+
   await browser.close();
 
   const params = { purchaseList, backList };
-  const resultList = await GetResultData(params,dataInfo.result);
-  console.log('resultList success');
+  const resultList = await GetResultData(params, dataInfo.result);
 
   const lists = [purchaseList, backList, resultList];
   ['purchase', 'back', 'result'].forEach(async (item, index) => {
@@ -42,5 +38,7 @@ const dataInfo = require('./dataInfo.json');
       fileName: dataInfo[item].fileName + dateText,
     };
     await MapToExcel(list, params);
-  });
+  }); 
+  // await GoExit();
+  // console.log('執行完成');
 })();
