@@ -20,8 +20,6 @@ async function Login(page) {
     const validNumber = await GetValidNum(fileName);
     await page.type('#securityId', validNumber, { delay: 100 });
     await page.click('#loginButton');
-    await page.waitForTimeout(5000);
-    await page.waitForNavigation();
     if (page.url() !== userInfo.loginCheck.fail) {
       process.stdout.write(`自動登入.....完成\r\n`);
       break;

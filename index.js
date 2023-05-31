@@ -17,13 +17,13 @@ const finishMes = () => {
     args: ['--window-size=1920,1080'],
     defaultViewport: null,
   });
-  // page.waitForNavigation({ timeout: 60000});
   const page = await browser.newPage();
 
   await Login(page);
 
   await page.waitForSelector('frame[name="Index"]', { timeout: 60000 });
 
+  const combinList = await GetDataMap(page, dataInfo.combin);
   const purchaseList = await GetDataMap(page, dataInfo.purchase);
   const backList = await GetDataMap(page, dataInfo.back);
 
@@ -31,18 +31,15 @@ const finishMes = () => {
 
   const params = { purchaseList, backList };
   const resultList = await GetResultData(params, dataInfo.result);
-  const lists = [purchaseList, backList, resultList];
-  (async () => {
-    for (const [index, item] of ['purchase', 'back', 'result'].entries()) {
-      const list = lists[index];
-      dateText = item === 'result' ? '' : new Date().toISOString().slice(0, 10).replace(/-/g, '');
-      const params = {
-        savePath: dataInfo.savePath,
-        foldeName: new Date().toLocaleDateString().replace(/\//g, '-'),
-        fileName: dataInfo[item].fileName + dateText,
-      };
-      await MapToExcel(list, params);
-    }
-    await finishMes();
-  })();
+  const lists = [combinList, purchaseList, backList, resultList];
+  ['combin', 'purchase', 'back', 'result'].map(async (item, index) => {
+    const list = lists[index];
+    dateText = item === 'result' ? '' : new Date().toISOString().slice(0, 10).replace(/-/g, '');
+    const params = {
+      savePath: dataInfo.savePath,
+      foldeName: new Date().toLocaleDateString().replace(/\//g, '-'),
+      fileName: dataInfo[item].fileName + dateText,
+    };
+    await MapToExcel(list, params);
+  });
 })();
