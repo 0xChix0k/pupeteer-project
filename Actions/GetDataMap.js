@@ -86,19 +86,18 @@ async function GetDataMap(page, action) {
     }, formElement);
 
     const trDatas = await page.evaluate(
-      async (trArr, factoryNo, companyName, isCombin) => {
+      async (trArr, factoryNo, companyName) => {
         let tempArr = [];
         trArr.shift();
         trArr.map((item) => {
-          temps = isCombin ? [...item] : [factoryNo, companyName, ...item];
-          tempArr.push(temps);
+          // temps = isCombin ? [...item] : [factoryNo, companyName, ...item];
+          tempArr.push([factoryNo, companyName, ...item]);
         });
         return tempArr;
       },
       trArr,
       factoryNo,
-      companyName,
-      isCombin
+      companyName
     );
     result.push(...trDatas);
   }
