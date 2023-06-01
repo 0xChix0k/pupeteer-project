@@ -17,8 +17,8 @@ async function GetDataMap(page, action) {
   //民國年
   let dataYear = (dataDate.getFullYear() - 1911).toString();
   // 月份从 0 开始，所以要加 1
-  let dataMonth = (dataDate.getMonth() + 1).toString();
-  let dataDay = dataDate.getDate().toString();
+  let dataMonth = (dataDate.getMonth() + 1).toString().padStart(2, '0');
+  let dataDay = dataDate.getDate().toString().padStart(2, '0');
   let result = [];
   result.push(action.titles);
 
