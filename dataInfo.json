@@ -1,6 +1,7 @@
 {
   "productUrl": "https://www.chuan-lian.com.tw/pxm-bin/APPXM/RoleLink?Layer=0&aa_old=18161169",
   "savePath": "D:\\東厚全聯合併\\比對差異",
+  "numericCol":["序號","商品代號","條碼","上存", "進貨", "退貨", "銷貨", "庫存","進貨數量","退貨數量","進貨量","退貨","剩餘"],
   "combin": {
     "url": "https://www.chuan-lian.com.tw/pxm-bin/APPXM/PX2001_D.jsp?aa_old=18161169",
     "formName": "PX2001_1",

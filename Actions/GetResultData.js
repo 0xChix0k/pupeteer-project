@@ -10,10 +10,10 @@ async function GetResultData(params,action) {
     
     await Promise.all(back.map((item,index) => {
       if(index===0) return;
-      const [ bFNo, bCNo, serial, date, bCode, barcode, name, back, remark ] = item;
+      const [ bFNo, bCNo, serial, date, bCode, barcode, name, cBack, remark ] = item;
       const chk = pFNo === bFNo && pCNo === bCNo && pCode === bCode;
       if (chk) {
-        tempBackCount = back;
+        tempBackCount = cBack;
         return;
       }
     }));

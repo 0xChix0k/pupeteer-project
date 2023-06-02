@@ -39,6 +39,7 @@ const finishMes = () => {
       savePath: dataInfo.savePath,
       foldeName: new Date().toLocaleDateString().replace(/\//g, '-'),
       fileName: dataInfo[item].fileName + dateText,
+      numericCol: dataInfo.numericCol,
     };
     await MapToExcel(list, params);
   });
