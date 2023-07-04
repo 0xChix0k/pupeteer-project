@@ -6,13 +6,11 @@ const MapToExcel = require('./Actions/MapToExcel').MapToExcel;
 const userInfo = require('./userInfo.json');
 const dataInfo = require('./dataInfo.json');
 
-const finishMes = () => {
-  return console.log('今日表單已下載完畢!請至 [東厚全聯合併] 查看!');
-};
 
 (async () => {
   const browser = await puppeteer.launch({
-    headless: 'new',
+    // headless: 'new',
+    headless: false,
     executablePath: userInfo.executablePath,
     args: ['--window-size=1920,1080'],
     defaultViewport: null,
@@ -20,6 +18,9 @@ const finishMes = () => {
   const page = await browser.newPage();
 
   await Login(page);
+
+  await page.waitForSelector('#sldDiv', { timeout: 60000 });
+  await page.click('#sldDiv > #navUL > li:nth-child(10) > a');
 
   await page.waitForSelector('frame[name="Index"]', { timeout: 60000 });
 

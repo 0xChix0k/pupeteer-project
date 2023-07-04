@@ -3,7 +3,7 @@
   "executablePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
   "homePage": "https://www.chuan-lian.com.tw",
   "userId": "D18161169",
-  "passwd": "a087555016",
+  "passwd": "b087555016",
   "loginCheck":{
     "success": "https://www.chuan-lian.com.tw/pxm-bin/APPXM/login.html?pxm1=18161169",
     "fail": "https://apxm-adv.chuan-lian.com.tw/APBPXM/loginSSO"
