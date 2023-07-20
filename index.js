@@ -8,8 +8,8 @@ const dataInfo = require("./dataInfo.json");
 
 (async () => {
   const browser = await puppeteer.launch({
-    // headless: 'new',
-    headless: false,
+    headless: 'new',
+    // headless: false,
     executablePath: userInfo.executablePath,
     args: ["--window-size=1920,1080"],
     defaultViewport: null,
