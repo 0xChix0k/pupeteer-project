@@ -18,10 +18,11 @@ const dataInfo = require("./dataInfo.json");
 
   await Login(page);
 
+  await page.waitForTimeout(2000);
   await page.waitForSelector("#sldDiv", { timeout: 60000 });
-  await page.click("#sldDiv > ul > li:nth-child(10) > a");
+  await page.click("#sldDiv > #navUL > li:nth-child(10) > a");
 
-  await page.waitForSelector('frame[name="Index"]', { timeout: 60000 });
+  await page.waitForSelector('frame[name="RspArea"]', { timeout: 60000 });
 
   const combinList = await GetDataMap(page, dataInfo.combin);
   const purchaseList = await GetDataMap(page, dataInfo.purchase);
