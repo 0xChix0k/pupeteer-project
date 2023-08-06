@@ -3,24 +3,24 @@
   "savePath": "D:\\東厚全聯合併\\比對差異",
   "numericCol":["廠編","序號","商品代號","條碼","上存", "進貨", "退貨", "銷貨", "庫存","進貨數量","退貨數量","進貨量","退貨","剩餘"],
   "combin": {
-    "url": "https://www.chuan-lian.com.tw/pxm-bin/APPXM/PX2001_D.jsp?aa_old=18161169",
+    "url": "https://apxm-adv.chuan-lian.com.tw/APBPXM/dePsiInventory/searchPage",
     "formName": "PX2001_1",
     "text": "合併",
     "titles": ["廠編","公司名","序號", "商品代號", "條碼", "品名/規格", "上存", "進貨", "退貨", "銷貨", "庫存", "更新日期"],
     "fileName": "各分店合併"
   },
   "purchase": {
-    "url": "https://www.chuan-lian.com.tw/pxm-bin/APPXM/PX2004_D.jsp?aa_old=18161169",
+    "url": "https://apxm-adv.chuan-lian.com.tw/APBPXM/dePsiPurchase/searchPage",
     "formName": "PX2004_1",
     "text": "進貨",
-    "titles": ["廠編","公司名","序號","商品代號","條碼","品名/規格","進貨數量","更新註記"],
+    "titles": ["廠編","公司名","序號","商品代號","條碼","品名規格","進貨量"],
     "fileName": "各分店進貨"
   },
   "back": {
-    "url": "https://www.chuan-lian.com.tw/pxm-bin/APPXM/PX2005_D.jsp?aa_old=18161169",
+    "url": "https://apxm-adv.chuan-lian.com.tw/APBPXM/dePsiReturn/searchPage",
     "formName": "PX2005_1",
     "text": "退貨",
-    "titles": ["廠編","公司名","序號","退貨日期","商品代號","條碼","品名/規格","退貨數量","更新註記"],
+    "titles": ["廠編","公司名","序號","退貨日期","商品代號","條碼","品名/規格","退貨量"],
     "fileName": "各分店退貨"
   },
   "result": {

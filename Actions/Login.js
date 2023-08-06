@@ -1,6 +1,8 @@
 const userInfo = require("../userInfo.json");
 const GetValidNum = require("./GetValidNum");
 
+
+
 async function Login(page) {
   process.stdout.write(`前往頁面.....執行\r`);
   await page.goto(userInfo.homePage, {
@@ -20,15 +22,29 @@ async function Login(page) {
     await captchaImage.screenshot({ path: fileName });
     const validNumber = await GetValidNum(fileName);
     await page.type("#securityId", validNumber, { delay: 100 });
-    await page.click("#loginButton");
-    await page.waitForTimeout(1500);
-    await page.waitForNavigation();
+    page.click("#loginButton");
 
-    if (page.url() === userInfo.loginCheck.fail) {
-      process.stdout.write(`登入失敗.....重試\r\n`);
-    } else {
+    let timeoutPromise = new Promise((resolve, reject) => {
+      let waitInSeconds = 10;
+      let id = setTimeout(() => {
+        clearTimeout(id);
+        reject("Timeout"); // reject this promise after 5 seconds
+      }, waitInSeconds * 1000);
+    });
+
+    try {
+      await Promise.race([
+        page.waitForNavigation({ url: userInfo.loginCheck.success }),
+        timeoutPromise,
+      ]);
       process.stdout.write(`自動登入.....完成\r\n`);
-      break; // 登入成功，跳出循環
+      break;
+    } catch (err) {
+      if (err === "Timeout") {
+        process.stdout.write(`登入失敗.....重試\r\n`);
+      } else {
+        continue;
+      }
     }
   }
 }

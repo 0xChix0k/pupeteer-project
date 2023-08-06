@@ -1,11 +1,11 @@
 {
-  "executablePath": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
-  "executablePathO": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+  "executablePathO": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+  "executablePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
   "homePage": "https://www.chuan-lian.com.tw",
   "userId": "D18161169",
   "passwd": "b087555016",
   "loginCheck":{
-    "success": "https://www.chuan-lian.com.tw/pxm-bin/APPXM/login.html?pxm1=18161169",
+    "success": "https://apxm-adv.chuan-lian.com.tw/APBPXM/home",
     "fail": "https://apxm-adv.chuan-lian.com.tw/APBPXM/loginSSO"
   }
 }
