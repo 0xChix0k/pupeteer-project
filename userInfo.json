@@ -1,10 +1,9 @@
 {
-  "executablePathO": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
-  "executablePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+  "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
   "homePage": "https://www.chuan-lian.com.tw",
   "userId": "D18161169",
   "passwd": "b087555016",
-  "loginCheck":{
+  "loginCheck": {
     "success": "https://apxm-adv.chuan-lian.com.tw/APBPXM/home",
     "fail": "https://apxm-adv.chuan-lian.com.tw/APBPXM/loginSSO"
   }

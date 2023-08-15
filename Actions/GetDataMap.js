@@ -16,6 +16,8 @@ async function GetDataMap(page, action) {
     return optionValues;
   }, selects);
 
+  console.log("optionList:", optionList.length);
+
   const formName = action.formName;
   const isCombin = action.fileName === "各分店合併";
   const today = new Date();
@@ -29,9 +31,7 @@ async function GetDataMap(page, action) {
   result.push(action.titles);
 
   for (var i = 0; i < optionList.length; i++) {
-    process.stdout.write(
-      `${action.fileName}取得.....${i}/${optionList.length}\r`
-    );
+    process.stdout.write(`${action.fileName}取得.....${i}/${optionList.length}\r`);
     await page.goto(action.url, {
       waitUntil: "domcontentloaded",
     });
@@ -43,10 +43,15 @@ async function GetDataMap(page, action) {
     }, optionList[i]);
 
     await page.waitForSelector("#deList_listbox", { timeout: 60000 });
-    await page.click("#deDiv > span");
-    await page.waitForTimeout(60000);
-
-    // await page.click(`#deList_listbox > li[data-offset-index="${i}"]`);
+    //打開廠商選單
+    await page.waitForTimeout(2000);
+    await page.click("#deDiv .k-dropdown-wrap");
+    //點擊廠商選單
+    await page.waitForTimeout(1500);
+    await page.click(`#deList_listbox li[data-offset-index="${i}"]`);
+    await page.waitForTimeout(1000);
+    //點擊查詢
+    await page.click("btn_search");
 
     //   if (isCombin === false) {
     //     //開始年月日
